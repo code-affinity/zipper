@@ -200,20 +200,6 @@ add_definitions( -DUSE_ZLIB )
 add_definitions( -DHAVE_AES )
 
 # make sure that we have a valid zip library
-check_library_exists("${ZLIB_LIBRARIES}" "gzopen" "" LIBZ_FOUND_SYMBOL)
-if(NOT LIBZ_FOUND_SYMBOL)
-    # this is odd, but on windows this check always fails! must be a
-    # bug in the current cmake version so for now only issue this
-    # warning on linux
-    if(UNIX)
-        message(WARNING
-"The chosen zlib library does not appear to be valid because it is
-missing certain required symbols. Please check that ${ZLIB_LIBRARIES} is
-the correct zlib library. For details about the error, please see
-${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log")
-    endif()
-endif()
-
 if(NOT EXISTS "${ZLIB_INCLUDE_DIRS}/zlib.h")
     message(FATAL_ERROR
 "The include directory specified for zlib does not appear to be
